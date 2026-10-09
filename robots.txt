@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /reading-success.html
+
+Sitemap: https://lezkt1811-maker.github.io/True-Sky-Astrology/sitemap.xml

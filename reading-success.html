@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://nominatim.openstreetmap.org https://timeapi.io https://starchart13-fulfillment.lezkt1811.workers.dev https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com; object-src 'none'; base-uri 'self';">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-M2TKEEQX6J"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag("js",new Date());gtag("config","G-M2TKEEQX6J");</script>
+<title>Payment Received | True Sky Astrology</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<style>
+
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  background:#000; color:#ffe9a8; font-family:'IBM Plex Sans',sans-serif; min-height:100vh;
+}
+.wrap{max-width:520px;margin:0 auto;padding:48px 18px 60px;text-align:center;}
+h1{
+  font-family:Marcellus,serif; font-weight:900; font-size:clamp(20px,6vw,28px);
+  color:#ffd700; text-shadow:0 0 20px rgba(255,215,0,0.4); margin-bottom:14px;
+}
+.check{font-size:44px;margin-bottom:14px;}
+p{font-size:14px;line-height:1.7;color:rgba(255,233,168,.85);margin-bottom:14px;}
+.card{
+  background:linear-gradient(180deg, rgba(255,215,0,.06), rgba(255,215,0,.02));
+  border:1px solid rgba(255,215,0,.3); border-radius:16px; padding:24px 20px; margin:24px 0;
+}
+.status-line{font-family:'Courier New',monospace; font-size:12px; color:rgba(255,233,168,.55); margin-top:16px;}
+.status-line.ready{color:#8dffb0;}
+.status-line.failed{color:#ff8f8f;}
+.progress-row{display:flex; align-items:center; gap:10px; margin-top:16px;}
+.progress-track{flex:1; height:10px; border-radius:999px; background:rgba(255,255,255,.08); border:1px solid rgba(255,215,0,.25); overflow:hidden;}
+.progress-fill{height:100%; width:0%; border-radius:999px; background:linear-gradient(90deg,#ffd700,#ffb347); box-shadow:0 0 10px rgba(255,215,0,.6); transition:width 1.1s ease, background .4s ease;}
+.progress-fill.ready{background:linear-gradient(90deg,#8dffb0,#2ee884);}
+.progress-fill.failed{background:linear-gradient(90deg,#ff8f8f,#ff5050);}
+.progress-pct{font-family:'Courier New',monospace; font-size:12px; color:rgba(255,233,168,.75); min-width:34px; text-align:right;}
+.btn-back{
+  display:inline-block; margin-top:20px; padding:14px 28px; border-radius:999px;
+  border:1px solid rgba(255,215,0,.4); background:rgba(255,215,0,.06); color:#ffd700;
+  font-family:'IBM Plex Sans',sans-serif; font-weight:900; font-size:14px; text-decoration:none; letter-spacing:.05em;
+}
+.contact{font-size:12px; color:rgba(255,233,168,.5); margin-top:24px; line-height:1.6;}
+.contact a{color:#ffd700;}
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Marcellus&display=swap">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="stylesheet" href="css/true-sky.css">
+<style>
+
+body{font-family:var(--ts-sans) !important;}
+h1,h2{color:var(--ts-ink) !important;background:none !important;-webkit-text-fill-color:currentColor !important;animation:none !important;text-transform:none !important;}
+a.btn-back,a.btn,.btn-back{color:var(--ts-gold) !important;border-color:var(--ts-hair) !important;box-shadow:none !important;text-transform:none !important;}
+.card,.box,.wrap > div{border-color:var(--ts-hair) !important;}
+
+</style>
+</head>
+<body>
+<script src="star-sparkle.js"></script>
+<div class="wrap">
+  <div class="check">✨</div>
+  <h1>Payment Received</h1>
+  <div class="card">
+    <p>Your True Sky Astrology reading is being prepared using the exact chart you already generated.</p>
+    <p>It will be emailed to you automatically as a PDF — usually within a few minutes. You don't need to keep this page open, and there's nothing else for you to do.</p>
+    <div class="status-line" id="statusLine">Checking status…</div>
+    <div class="progress-row">
+      <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+      <div class="progress-pct" id="progressPct">0%</div>
+    </div>
+  </div>
+  <a class="btn-back" href="index.html">&larr; Back to True Sky Astrology</a>
+  <p class="contact">
+    Reading hasn't arrived after a while? Email <a id="contactLink" href="#">this address</a> with your payment confirmation and we'll sort it out.
+  </p>
+</div>
+
+<script src="reading-config.js"></script>
+<script>
+(function(){
+  try{
+    const email = READING_SALES_CONFIG.contactEmail;
+    if(email && email.indexOf("REPLACE_WITH") !== 0){
+      document.getElementById("contactLink").href = "mailto:" + email;
+      document.getElementById("contactLink").textContent = email;
+    }
+  }catch(e){}
+
+  const params = new URLSearchParams(window.location.search);
+  const sessionId = params.get("session_id");
+  const statusEl = document.getElementById("statusLine");
+  const base = (typeof READING_SALES_CONFIG !== "undefined" && READING_SALES_CONFIG.fulfillmentApiBase) || "";
+
+  if(!sessionId || !base || base.indexOf("REPLACE_WITH") === 0){
+    statusEl.textContent = "";
+    return;
+  }
+
+  /* Fires a GA event at most once per Checkout Session ID, using localStorage as the
+     dedup store -- so a refresh or revisit of this exact success-page URL (same
+     session_id in the query string) never double-counts a purchase or delivery,
+     no matter how many times /status is polled or the page is reloaded. */
+  function gaOnce(key, name, params){
+    try{
+      const storeKey = "sc13_ga_" + key + "_" + sessionId;
+      if(localStorage.getItem(storeKey)) return;
+      localStorage.setItem(storeKey, "1");
+      if(typeof gtag === "function") gtag("event", name, params || {});
+    }catch(e){}
+  }
+
+  const PRODUCT_BY_SCHEMA = {
+    "starchart13-detailed-reading": {product_id:"full_reading_25", price:25},
+    "starchart13-mini-reading": {product_id:"mini_reading_7", price:7},
+  };
+
+  const labels = {
+    prepared: "Waiting for payment confirmation…",
+    paid: "Payment confirmed — starting your reading…",
+    generating: "Writing your personalized reading…",
+    generated: "Reading complete — preparing your PDF…",
+    emailing: "Sending your PDF now…",
+    fulfilled: "✓ Your reading has been emailed!",
+    failed: "We hit a snag — we've been notified and will follow up by email.",
+    pending: "Waiting for payment confirmation…",
+  };
+
+  /* Real fulfillment stages, not a simulated/fake progress animation -- each number is
+     how far through the actual pipeline (webhook -> AI writing -> PDF -> email) that
+     stage represents. "failed" freezes the bar wherever it last was, in red, rather
+     than resetting it, since the work really did get partway through. */
+  const stagePercent = {
+    prepared: 8,
+    pending: 8,
+    paid: 20,
+    generating: 50,
+    generated: 78,
+    emailing: 92,
+    fulfilled: 100,
+  };
+
+  const progressFill = document.getElementById("progressFill");
+  const progressPct = document.getElementById("progressPct");
+  let lastPercent = 0;
+
+  function setProgress(status){
+    const target = stagePercent[status];
+    if(typeof target === "number") lastPercent = target;
+    progressFill.style.width = lastPercent + "%";
+    progressPct.textContent = lastPercent + "%";
+    progressFill.className = "progress-fill" + (status === "fulfilled" ? " ready" : status === "failed" ? " failed" : "");
+  }
+
+  let attempts = 0;
+  function poll(){
+    attempts++;
+    fetch(base + "/status?session_id=" + encodeURIComponent(sessionId))
+      .then(function(r){ return r.json(); })
+      .then(function(data){
+        const label = labels[data.status] || "Checking status…";
+        statusEl.textContent = label;
+        statusEl.className = "status-line" + (data.status === "fulfilled" ? " ready" : data.status === "failed" ? " failed" : "");
+        setProgress(data.status);
+
+        const product = PRODUCT_BY_SCHEMA[data.schema] || {};
+        // Stripe only ever redirects here after a completed Checkout Session, so any
+        // status at or past "paid" is itself the purchase-confirmation signal.
+        if(data.status && data.status !== "pending" && data.status !== "prepared"){
+          gaOnce("purchase", "reading_purchase_completed", product);
+        }
+        if(data.status === "fulfilled"){
+          gaOnce("delivered", "reading_delivery_completed", product);
+        }
+        if(data.status === "failed"){
+          gaOnce("failed", "reading_delivery_failed", product);
+        }
+
+        if(data.status !== "fulfilled" && data.status !== "failed" && attempts < 40){
+          setTimeout(poll, 4000);
+        }
+      })
+      .catch(function(){ statusEl.textContent = ""; });
+  }
+  poll();
+})();
+</script>
+</body>
+</html>
